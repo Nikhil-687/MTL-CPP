@@ -69,20 +69,45 @@ public:
         return memory[a];
     }
     friend ostream& operator<<(ostream& os, vector<T> a){
-        for(int i = 0;i < a.length;i++){
-            os << a[i];
+        for(int i = 0;i < a.size();i++){
+            os << a[i] << " ";
         }
         os << "\n";
         return os;
+    }
+    T pop_back(){
+        try
+        {
+            if(length == 0){
+                cerr << "poping from an empty vector\n";
+                throw overflow_error("Vector is empty");
+            }
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << e.what() << '\n';
+            std::exit(EXIT_FAILURE);
+        }
+
+        T x = memory[length - 1];
+        length--;
+        return x;        
+    }
+    T * begin(){
+        return memory;
+    }
+    T * end(){
+        return memory + length;
     }
 };
 
 
 int main(){
     vector<int> a;
-    vector<vector<int>> b(2, vector<int>(2, 0));
-    a.push_back(3);
+    vector<vector<int>> b;
+    a.push_back(5);
     a.push_back(4);
+    a.push_back(2);
     b.push_back(a);
     for(int j = 0;j < b.size();j++){
         for(int i = 0;i < b[j].size();i++){
@@ -90,5 +115,8 @@ int main(){
         }
         cout << "\n";
     }
+    cout << "\n";
     cout << b;
+    cout << *b.begin() << "\n";
+    cout << *(a.end() - 1) << "\n";
 }
