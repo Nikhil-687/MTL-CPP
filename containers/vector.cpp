@@ -16,7 +16,15 @@ public:
     vector(int t){
         length = t;
         capacity = t;
-        memory = new T[capacity];
+        // if(sizeof(T) <= 4){
+            // a general collapse
+            // also support to user defined smaller datatypes
+            // larger implementation so breacking it here and creating a diff class bitVector at /container/bitVector.cpp
+            // memory = new T[capacity];
+        // }
+        // else{
+            memory = new T[capacity];
+        // }
     }
     vector(int t, T a){
         length = t;
@@ -96,27 +104,36 @@ public:
     T * begin(){
         return memory;
     }
+    T front(){
+        return *memory;
+    }
     T * end(){
         return memory + length;
+    }
+    T back(){
+        return *(memory + length -1);
+    }
+    long memoryUsed(){
+        return capacity * sizeof(T);
     }
 };
 
 
-int main(){
-    vector<int> a;
-    vector<vector<int>> b;
-    a.push_back(5);
-    a.push_back(4);
-    a.push_back(2);
-    b.push_back(a);
-    for(int j = 0;j < b.size();j++){
-        for(int i = 0;i < b[j].size();i++){
-            cout << b[j][i] << " ";
-        }
-        cout << "\n";
-    }
-    cout << "\n";
-    cout << b;
-    cout << *b.begin() << "\n";
-    cout << *(a.end() - 1) << "\n";
-}
+// int main(){
+//     vector<int> a;
+//     vector<vector<int>> b;
+//     a.push_back(5);
+//     a.push_back(4);
+//     a.push_back(2);
+//     b.push_back(a);
+//     for(int j = 0;j < b.size();j++){
+//         for(int i = 0;i < b[j].size();i++){
+//             cout << b[j][i] << " ";
+//         }
+//         cout << "\n";
+//     }
+//     cout << "\n";
+//     cout << b;
+//     cout << *b.begin() << "\n";
+//     cout << *(a.end() - 1) << "\n";
+// }
